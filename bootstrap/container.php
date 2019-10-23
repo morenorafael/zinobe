@@ -9,14 +9,17 @@ use Zend\Diactoros\ServerRequestFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$dotEnv = new Dotenv(__DIR__ . '/../');
+$dotEnv = Dotenv::create(__DIR__ . '/../');
+$dotEnv->load();
 
-$concainer = new Container;
+$container = new Container;
 
-$concainer->share('response', Response::class);
-$concainer->share('request', function () {
+$container->share('response', Response::class);
+$container->share('request', function () {
     return ServerRequestFactory::fromGlobals($_SERVER, $_GET, $_POST, $_COOKIE, $_FILES);
 });
 
-$concainer->addServiceProvider(SessionServiceProvider::class);
-$concainer->addServiceProvider(ViewServiceProvider::class);
+$container->addServiceProvider(SessionServiceProvider::class);
+$container->addServiceProvider(ViewServiceProvider::class);
+
+$route = require __DIR__ . '/../routes/web.php';
