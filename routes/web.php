@@ -1,9 +1,9 @@
 <?php
 
+use League\Route\RouteCollection;
 use League\Route\RouteGroup;
-use League\Route\Router;
 
-$route = new Router;
+$route = new RouteCollection($container);
 
 $route->group('/', function (RouteGroup $route) use ($container) {
     $route->map('GET', '/', 'App\Http\Controllers\HomeController::index');

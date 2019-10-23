@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-class HomeController
+use App\Services\View;
+
+class HomeController extends BaseController
 {
+    public function __construct(View $view)
+    {
+        parent::__construct($view);
+    }
+
     /**
      *
      */
-    public function index()
+    public function index($request, $response)
     {
-        echo "ads";
+        return $this->view->render('welcome.twig');
     }
 }

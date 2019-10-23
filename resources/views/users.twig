@@ -1,0 +1,26 @@
+{% extends "layouts/app.twig" %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Correo Electrónico</th>
+            <th>País</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.document }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.country }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

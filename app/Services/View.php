@@ -18,7 +18,7 @@ class View
 
     public function __construct(ResponseInterface $response)
     {
-        $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../resources/view');
+        $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../resources/views');
         $view = new \Twig_Environment($loader);
 
         $this->view = $view;

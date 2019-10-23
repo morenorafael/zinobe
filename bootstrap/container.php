@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\ControllerServiceProvider;
 use App\Providers\SessionServiceProvider;
 use App\Providers\ViewServiceProvider;
 use Dotenv\Dotenv;
@@ -9,7 +10,7 @@ use Zend\Diactoros\ServerRequestFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$dotEnv = Dotenv::create(__DIR__ . '/../');
+$dotEnv = new Dotenv(__DIR__ . '/../');
 $dotEnv->load();
 
 $container = new Container;
@@ -21,5 +22,12 @@ $container->share('request', function () {
 
 $container->addServiceProvider(SessionServiceProvider::class);
 $container->addServiceProvider(ViewServiceProvider::class);
+$container->addServiceProvider(ControllerServiceProvider::class);
 
 $route = require __DIR__ . '/../routes/web.php';
+
+$container->share('emitter', Response\SapiEmitter::class);;
+
+$response = $route->dispatch($container->get('request'), $container->get('response'));
+
+$container->get('emitter')->emit($response);
