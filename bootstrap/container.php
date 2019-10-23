@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\SessionServiceProvider;
+use App\Providers\ViewServiceProvider;
 use Dotenv\Dotenv;
 use League\Container\Container;
 use Zend\Diactoros\Response;
@@ -18,3 +19,4 @@ $concainer->share('request', function () {
 });
 
 $concainer->addServiceProvider(SessionServiceProvider::class);
+$concainer->addServiceProvider(ViewServiceProvider::class);
