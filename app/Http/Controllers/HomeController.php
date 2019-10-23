@@ -16,6 +16,6 @@ class HomeController extends BaseController
      */
     public function index($request, $response)
     {
-        return $this->view->render('welcome.twig');
+        return $this->view->render('welcome');
     }
 }

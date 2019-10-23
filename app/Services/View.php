@@ -35,7 +35,7 @@ class View
      */
     public function render(string $view, array $data = []): ResponseInterface
     {
-        $this->response->getBody()->write($this->view->render($view, $data));
+        $this->response->getBody()->write($this->view->render("{$view}.twig", $data));
 
         return $this->response;
     }
