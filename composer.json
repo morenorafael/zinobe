@@ -1,0 +1,28 @@
+{
+    "name": "rafael/zinobe",
+    "description": "Prueba Técnica",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Rafael Moreno",
+            "email": "alejandro8924@gmail.com"
+        }
+    ],
+    "require": {
+        "league/container": "^3.3",
+        "league/route": "^4.3",
+        "illuminate/database": "^6.3",
+        "twig/twig": "^2.12",
+        "aura/session": "^2.1",
+        "zendframework/zend-diactoros": "^2.1",
+        "vlucas/phpdotenv": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    }
+}
