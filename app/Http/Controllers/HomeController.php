@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\View;
+use App\Models\User;
+use Zend\Diactoros\ServerRequest;
 
 class HomeController extends BaseController
 {
-    public function __construct(View $view)
-    {
-        parent::__construct($view);
-    }
-
     /**
-     *
+     * @param ServerRequest $request
+     * @return \Psr\Http\Message\ResponseInterface
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
-    public function index($request, $response)
+    public function index(ServerRequest $request)
     {
-        return $this->view->render('welcome');
+        $users = [];
+
+        if (isset($request->getQueryParams()['search'])) {
+            $users = User::where('first_name', 'LIKE', "%{$_GET['search']}%")
+                ->orWhere('email', 'LIKE', "%{$_GET['search']}%")
+                ->get();
+        } else {
+            $users = User::all();
+        }
+
+
+        return $this->view->render('welcome', compact('users'));
     }
 }

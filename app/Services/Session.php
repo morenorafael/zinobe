@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Aura\Session\Segment;
-use Aura\Session\SessionFactory;
+use Aura\Session\Session as AuraSession;
 
 /**
  * Class Session
@@ -12,7 +12,7 @@ use Aura\Session\SessionFactory;
 class Session
 {
     /**
-     * @var \Aura\Session\Session
+     * @var AuraSession
      */
     protected $session;
 
@@ -21,9 +21,9 @@ class Session
      */
     protected $segment = 'Customer';
 
-    public function __construct()
+    public function __construct(AuraSession $session)
     {
-        $this->session = (new SessionFactory())->newInstance($_COOKIE);
+        $this->session = $session;
     }
 
     /**

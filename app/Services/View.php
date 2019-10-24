@@ -2,12 +2,14 @@
 
 namespace App\Services;
 
+use App\Tools\TwigFunctions;
 use Psr\Http\Message\ResponseInterface;
+use Twig\Environment;
 
 class View
 {
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     protected $view;
 
@@ -19,7 +21,13 @@ class View
     public function __construct(ResponseInterface $response)
     {
         $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../resources/views');
-        $view = new \Twig_Environment($loader);
+        $view = new Environment($loader);
+
+        $twigFunctions = new \Twig_SimpleFunction(TwigFunctions::class, function ($method, $params = []) {
+            return TwigFunctions::$method($params);
+        });
+
+        $view->addFunction($twigFunctions);
 
         $this->view = $view;
         $this->response = $response;

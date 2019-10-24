@@ -2,16 +2,17 @@
 
 namespace App\Providers;
 
+use App\Services\Auth;
 use App\Services\Session;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
-class SessionServiceProvider extends AbstractServiceProvider
+class AuthServiceProvier extends AbstractServiceProvider
 {
     /**
      * @var array
      */
     protected $provides = [
-        Session::class
+        Auth::class
     ];
 
     /**
@@ -19,7 +20,7 @@ class SessionServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        $this->getContainer()->add(Session::class)
-            ->addArgument($this->getContainer()->get('session'));
+        $this->getContainer()->add(Auth::class)
+            ->addArgument($this->getContainer()->get(Session::class));
     }
 }

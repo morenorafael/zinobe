@@ -20,6 +20,6 @@ class ViewServiceProvider extends AbstractServiceProvider
     public function register()
     {
         $this->getContainer()->add(View::class)
-            ->withArgument($this->getContainer()->get('response'));
+            ->addArgument($this->getContainer()->get('response'));
     }
 }

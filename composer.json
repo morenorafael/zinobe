@@ -8,15 +8,6 @@
             "email": "alejandro8924@gmail.com"
         }
     ],
-    "require": {
-        "league/container": "^2.4",
-        "league/route": "^3.0",
-        "illuminate/database": "^5.6",
-        "twig/twig": "^2.4",
-        "aura/session": "^2.1",
-        "zendframework/zend-diactoros": "^1.8",
-        "vlucas/phpdotenv": "^2.5"
-    },
     "autoload": {
         "psr-4": {
             "App\\": "app/"
@@ -24,5 +15,19 @@
         "files": [
             "app/helpers.php"
         ]
+    },
+    "require": {
+        "league/container": "^3.3",
+        "league/route": "^4.3",
+        "illuminate/database": "^6.3",
+        "aura/session": "^2.1",
+        "zendframework/zend-diactoros": "^2.1",
+        "vlucas/phpdotenv": "^3.6",
+        "zendframework/zend-httphandlerrunner": "^1.1",
+        "twig/twig": "^2.12",
+        "respect/validation": "^1.1"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.5"
     }
 }
