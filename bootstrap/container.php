@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\Authenticate;
 use App\Providers\ControllerServiceProvider;
+use App\Providers\DatabaseServiceProvider;
 use App\Providers\SessionServiceProvider;
 use App\Providers\ViewServiceProvider;
 use App\Services\Session;
@@ -26,6 +27,7 @@ $container->share('request', function () {
 $container->addServiceProvider(SessionServiceProvider::class);
 $container->addServiceProvider(ViewServiceProvider::class);
 $container->addServiceProvider(ControllerServiceProvider::class);
+$container->addServiceProvider(DatabaseServiceProvider::class);
 
 // Middleware
 $container->share(Authenticate::class)->withArgument($container->get(Session::class));
