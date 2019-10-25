@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Session;
 use App\Services\View;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
@@ -20,6 +21,9 @@ class ViewServiceProvider extends AbstractServiceProvider
     public function register()
     {
         $this->getContainer()->add(View::class)
-            ->addArgument($this->getContainer()->get('response'));
+            ->addArguments([
+                $this->getContainer()->get('response'),
+                $this->getContainer()->get(Session::class),
+            ]);
     }
 }

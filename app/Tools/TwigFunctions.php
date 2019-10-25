@@ -14,32 +14,32 @@ class TwigFunctions
     /**
      * @var Session
      */
-    static $session;
+    protected $session;
     /**
      * @var LoginRequest
      */
     private $request;
 
-    public function __construct(Session $session, LoginRequest $request)
+    public function __construct(Session $session)
     {
-        self::$session = $session;
-        $this->request = $request;
+        $this->session = $session;
+        // $this->request = $request;
     }
 
     /**
      * @return mixed
      */
-    public static function userIsLogged()
+    public function userIsLogged()
     {
-        return self::$session->get('user');
+        return $this->session->get('user');
     }
 
     /**
      * @param array $params
      * @return mixed
      */
-    public static function flash(array $params)
+    public function flash(array $params)
     {
-        return self::$session->getFlash($params[0]);
+        return $this->session-->getFlash($params[0]);
     }
 }

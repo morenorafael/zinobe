@@ -1,5 +1,7 @@
 <?php
 
+use App\Tools\TwigFunctions;
+
 if (!function_exists('redirect')) {
 
     /**

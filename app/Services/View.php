@@ -17,20 +17,26 @@ class View
      * @var ResponseInterface
      */
     protected $response;
+    /**
+     * @var Session
+     */
+    private $session;
 
-    public function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response, Session $session)
     {
         $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../resources/views');
         $view = new Environment($loader);
 
-        $twigFunctions = new \Twig_SimpleFunction(TwigFunctions::class, function ($method, $params = []) {
-            return TwigFunctions::$method($params);
-        });
+        // $twigFunctions = new \Twig_SimpleFunction(TwigFunctions::class, function ($method, $params = []) {
+        //     return TwigFunctions::$method($params);
+        // });
 
-        $view->addFunction($twigFunctions);
+        // $view->addFunction($twigFunctions);
+        $view->addGlobal('twigFunctions', new TwigFunctions($session));
 
         $this->view = $view;
         $this->response = $response;
+        $this->session = $session;
     }
 
     /**
