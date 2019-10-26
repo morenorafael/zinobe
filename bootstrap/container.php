@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Request\LoginRequest;
 use App\Providers\AuthServiceProvier;
 use App\Providers\ControllerServiceProvider;
@@ -49,6 +50,7 @@ $container->share('SharedContainerTwig', TwigFunctions::class)
 
 // Middleware
 $container->share(Authenticate::class)->addArgument($container->get(Session::class));
+$container->share(RedirectIfAuthenticated::class)->addArgument($container->get(Session::class));
 
 $route = require __DIR__ . '/../routes/web.php';
 

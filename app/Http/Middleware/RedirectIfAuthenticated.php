@@ -9,13 +9,17 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response;
 
-class Authenticate implements MiddlewareInterface
+class RedirectIfAuthenticated implements MiddlewareInterface
 {
     /**
      * @var Session
      */
     private $session;
 
+    /**
+     * RedirectIfAuthenticated constructor.
+     * @param Session $session
+     */
     public function __construct(Session $session)
     {
         $this->session = $session;
@@ -26,14 +30,10 @@ class Authenticate implements MiddlewareInterface
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
-
-        $response = new Response;
-
-        if (!$this->session->get('user')) {
-            return $response
-                ->withStatus( 302)
-                ->withHeader('Location', '/');
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        if ($this->session->get('user')) {
+            redirect('/');
         }
 
         return $handler->handle($request);
