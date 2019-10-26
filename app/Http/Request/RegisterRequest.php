@@ -23,8 +23,7 @@ class RegisterRequest extends Request implements ContractRequest
             ->key('document', Validator::alpha())
             ->key('country', Validator::alpha())
             ->key('email', Validator::email())
-            ->key('password', Validator::length(6))
-            ->key('password_confirmation', Validator::equals($_POST['password']));
+            ->key('password', Validator::length(6));
     }
 
     public function mesasges()
