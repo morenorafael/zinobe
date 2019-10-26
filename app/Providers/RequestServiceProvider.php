@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Providers;
 
-
 use App\Http\Request\LoginRequest;
-use App\Services\Request;
+use App\Http\Request\RegisterRequest;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Respect\Validation\Validator;
 
@@ -15,7 +13,8 @@ class RequestServiceProvider extends AbstractServiceProvider
      * @var array
      */
     protected $provides = [
-        LoginRequest::class
+        LoginRequest::class,
+        RegisterRequest::class,
     ];
 
     /**
@@ -26,6 +25,9 @@ class RequestServiceProvider extends AbstractServiceProvider
         $this->getContainer()->add(Validator::class);
 
         $this->getContainer()->add(LoginRequest::class)
+            ->addArgument($this->getContainer()->get(Validator::class));
+
+        $this->getContainer()->add(RegisterRequest::class)
             ->addArgument($this->getContainer()->get(Validator::class));
     }
 }

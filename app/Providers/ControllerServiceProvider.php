@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Request\LoginRequest;
+use App\Http\Request\RegisterRequest;
 use App\Services\Auth;
 use App\Services\Session;
 use App\Services\View;
@@ -18,6 +20,7 @@ class ControllerServiceProvider extends AbstractServiceProvider
     protected $provides = [
         HomeController::class,
         LoginController::class,
+        RegisterController::class,
     ];
 
     /**
@@ -35,5 +38,13 @@ class ControllerServiceProvider extends AbstractServiceProvider
             $this->getContainer()->get(Session::class),
             $this->getContainer()->get(Auth::class),
         ]);
+
+        $this->getContainer()->add(RegisterController::class)->addArguments([
+            $this->getContainer()->get(View::class),
+            $this->getContainer()->get(RegisterRequest::class),
+            $this->getContainer()->get(Session::class),
+            $this->getContainer()->get(Auth::class),
+        ]);
+
     }
 }

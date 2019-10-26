@@ -7,8 +7,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response;
 
+/**
+ * Class RedirectIfAuthenticated
+ * @package App\Http\Middleware
+ */
 class RedirectIfAuthenticated implements MiddlewareInterface
 {
     /**
@@ -32,6 +35,8 @@ class RedirectIfAuthenticated implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        print_r($this->session->get('user'));
+
         if ($this->session->get('user')) {
             redirect('/');
         }
