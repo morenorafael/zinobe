@@ -30,7 +30,9 @@
         {% else %}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Salir</a>
+                    <a class="nav-link" href="/logout"
+                       onclick="event.preventDefault(); document.getElementById('form-logout').submit();">Salir</a>
+                    <form action="/logout" id="form-logout" method="POST"></form>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

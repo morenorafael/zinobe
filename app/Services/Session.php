@@ -78,4 +78,12 @@ class Session
     {
         $this->getSegment()->setFlash($key, $value);
     }
+
+    /**
+     * @return bool
+     */
+    public function destroy(): bool
+    {
+        return $this->session->destroy();
+    }
 }

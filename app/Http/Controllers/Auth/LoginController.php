@@ -81,4 +81,15 @@ class LoginController extends BaseController
             }
         }
     }
+
+    /**
+     *
+     */
+    public function logout()
+    {
+        if ($this->auth->destroyUserSession()) {
+            redirect('login');
+        }
+
+    }
 }

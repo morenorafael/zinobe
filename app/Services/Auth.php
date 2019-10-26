@@ -23,4 +23,12 @@ class Auth
     {
         $this->session->set('user', $user);
     }
+
+    /**
+     * @return bool
+     */
+    public function destroyUserSession(): bool
+    {
+        return $this->session->destroy();
+    }
 }
